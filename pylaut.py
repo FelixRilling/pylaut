@@ -21,8 +21,8 @@ class PyLaut:
 
         listener.start()
 
-    def __on_press(self, key: KeyCode):
-        if hasattr(key, "char"):
+    def __on_press(self, key: keyboard.KeyCode):
+        if hasattr(key, "char") and key.char is not None:
             self.__key_strokes.append(key.char)
             key_stroke_string: str = "".join(self.__key_strokes)
             for sequence, target in self.__key_map.items():
