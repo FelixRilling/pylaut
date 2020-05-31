@@ -1,4 +1,8 @@
+import logging
+
 from pylaut import PyLaut
+
+logging.basicConfig(level=logging.INFO)
 
 PyLaut({
     "ae;": "ä", "Ae;": "Ä",
