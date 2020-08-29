@@ -15,18 +15,19 @@ class PyLaut:
 
     def __init__(self, key_binds: Dict[str, str]):
         self.__key_binds = key_binds
+
         deque_max_size: int = max(map(lambda key: len(key), key_binds.keys()))
         self.__key_strokes = deque({}, deque_max_size)
-        self.__logger.info("Allocated %s slots for keys in the key stroke dequeue.",
-                           deque_max_size)
+        self.__logger.debug("Allocated %s slots for keys in the key stroke dequeue.",
+                            deque_max_size)
 
         self.__controller = keyboard.Controller()
 
     def start(self):
-        with keyboard.Listener(
-                on_press=self.__on_press) as listener:
+        with keyboard.Listener(on_press=self.__on_press) as listener:
+            self.__logger.info("Started listing for key inputs with %s key sequences registered.",
+                               len(self.__key_binds))
             listener.join()
-        listener.start()
 
     def __on_press(self, key: keyboard.KeyCode):
         if hasattr(key, "char") and key.char is not None:
@@ -40,8 +41,8 @@ class PyLaut:
         key_stroke_string: str = "".join(self.__key_strokes)
         for key_bind, key_bind_result in self.__key_binds.items():
             if key_stroke_string.endswith(key_bind):
-                self.__logger.info("Key bind '%s' was matched in key strokes '%s'!", key_bind,
-                                   key_stroke_string)
+                self.__logger.debug("Key bind '%s' was matched in key strokes '%s'!", key_bind,
+                                    key_stroke_string)
                 self.__handle_key_bind_invocation(key_bind, key_bind_result)
                 break
             else:
@@ -51,17 +52,17 @@ class PyLaut:
     def __handle_key_bind_invocation(self, key_bind: str, key_bind_result: str):
         self.__key_strokes.clear()
 
-        # Delete inputted key bind trigger values
+        # Delete inputted key sequence trigger values
         to_remove: int = len(key_bind)
         for i in range(to_remove):
             self.__controller.press(keyboard.Key.backspace)
             self.__controller.release(keyboard.Key.backspace)
-        self.__logger.info("Successfully removed %s characters of the original key bind.",
-                           to_remove)
+        self.__logger.debug("Successfully removed %s characters of the original key bind.",
+                            to_remove)
 
-        # Input replacement
+        # Insert replacement
         for letter in key_bind_result:
             letter_key_code = keyboard.KeyCode.from_char(letter)
             self.__controller.press(letter_key_code)
             self.__controller.release(letter_key_code)
-        self.__logger.info("Successfully inserted key bind result '%s'.", key_bind_result)
+        self.__logger.debug("Successfully inserted key bind result '%s'.", key_bind_result)
