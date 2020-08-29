@@ -1,12 +1,17 @@
 import logging
+from typing import Dict
+
+import yaml
 
 from pylaut import PyLaut
 
 logging.basicConfig(level=logging.INFO)
 
-PyLaut({
-    "ae;": "ä", "Ae;": "Ä",
-    "oe;": "ö", "Oe;": "Ö",
-    "ue;": "ü", "Ue;": "Ü",
-    "ss;": "ß",
-}).start()
+with open(r"./config.yaml") as file:
+    config = yaml.load(file, Loader=yaml.SafeLoader)
+
+    bindings: Dict[str, str] = config.get("bindings")
+    if bindings is None:
+        raise ValueError("'bindings' was not found in config.")
+
+    PyLaut(bindings).start()
