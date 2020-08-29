@@ -1,16 +1,20 @@
 # PyLaut
 
-Simple python script allowing for hotkey-style letter replacement.
+Simple Python script allowing for key sequence input triggered text replacement.
 
 ## Dependencies
- Requires Python 3.x and the installation of `pynput` through pip.
+Requires Python 3.x and pip.
+ 
+ ```shell script
+pip install -r requirements.txt
+```
  
 ## Usage
-
 Configure the dict in `main.py` to fit your needs, then run the file.
 
-The default bindings are:
+The default key sequence bindings are:
 
-- `ae;`,`oe;`,`ue;`: `ä`,`ö`,`ü`
-- `Ae;`,`Oe;`,`Ue;`: `Ä`,`Ö`,`Ü`
+- `ae;`:`ä`, `Ae;`: `Ä`
+- `oe;`:`ö`, `Oe;`: `Ö`
+- `ue;`:`ü`, `Ue;`: `Ü`
 - `ss;`: `ß`
