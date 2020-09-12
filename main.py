@@ -7,7 +7,7 @@ from pylaut import PyLaut
 
 logging.basicConfig(level=logging.INFO)
 
-with open(r"./config.yaml") as file:
+with open(r"./config.yaml", encoding="utf8") as file:
     config = yaml.load(file, Loader=yaml.SafeLoader)
 
     bindings: Dict[str, str] = config.get("bindings")
