@@ -28,5 +28,7 @@ The default key sequence bindings are:
 
 ## Notes
 
-- Be careful not to register bindings which may trigger themselves or others upon replacement
+- Should work in every environment where pynput works, namely Linux (Under an X server), Windows and macOS.
+    - See <https://pynput.readthedocs.io/en/latest/limitations.html> for details.
+- Be careful not to register bindings which may trigger themselves or others upon replacement.
 - Due to the design of this script, removing characters (e.g. typos) from the sequence and continuing typing it will prevent the script from registering the sequence. The sequence has to be written without any other key inputs in between.
