@@ -1,3 +1,4 @@
+import argparse
 import logging
 from typing import Dict
 
@@ -7,7 +8,19 @@ from pylaut import PyLaut
 
 logging.basicConfig(level=logging.INFO)
 
-with open(r"./config.yaml", encoding="utf8") as file:
+parser = argparse.ArgumentParser(
+    description="simple python script allowing for key sequence input triggered text replacement."
+)
+parser.add_argument(
+    "-c",
+    "--config",
+    default=r"./config.yaml",
+    help="path to a configuration file."
+)
+args = parser.parse_args()
+
+logging.debug("Loading config '%s'.", args.config)
+with open(args.config, encoding="utf8") as file:
     config = yaml.load(file, Loader=yaml.SafeLoader)
 
     bindings: Dict[str, str] = config.get("bindings")

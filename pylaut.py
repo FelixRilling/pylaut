@@ -18,14 +18,14 @@ class PyLaut:
 
         deque_max_size: int = max(map(lambda key: len(key), key_binds.keys()))
         self.__key_strokes = deque({}, deque_max_size)
-        self.__logger.debug("Allocated %s slots for keys in the key stroke dequeue.",
+        self.__logger.debug("Allocated %s slot(s) for keys in the key stroke dequeue.",
                             deque_max_size)
 
         self.__controller = keyboard.Controller()
 
     def start(self):
         with keyboard.Listener(on_press=self.__on_press) as listener:
-            self.__logger.info("Started listing for key inputs with %s key sequences registered.",
+            self.__logger.info("Started listing for key inputs with %s key sequence(s) registered.",
                                len(self.__key_binds))
             listener.join()
 
