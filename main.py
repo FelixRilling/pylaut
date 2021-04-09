@@ -9,7 +9,7 @@ from pylaut import PyLaut
 logging.basicConfig(level=logging.INFO)
 
 parser = argparse.ArgumentParser(
-    description="simple python script allowing for key sequence input triggered text replacement."
+    description="Simple Python script allowing for key sequence input triggered text replacement."
 )
 parser.add_argument(
     "-c",
