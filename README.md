@@ -4,19 +4,15 @@ Simple Python script allowing for key sequence input triggered text replacement.
 
 ## Dependencies
 
-Requires Python 3.x and pip.
-
- ```shell script
-pip install -r requirements.txt
-```
+- Requires Python 3.x.
+- Install the python modules listed in `requirements.txt` using your package manager or pip.
 
 ## Usage
 
 Start `main.py`. Now, typing any of the defined sequences will trigger them to be replaced.
 
-The default key sequence bindings can be found in the [default config](./config.yaml).
-
-Using the config flag (`-c` or `--config`) a custom configuration file with different bindings can be set.
+The default key sequence bindings can be found in the [default config](./config.yaml). A custom configuration file with
+different bindings can be set using the config flag (`-c` or `--config`).
 
 ## Notes
 
