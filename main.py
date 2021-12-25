@@ -23,8 +23,8 @@ logging.debug("Loading config '%s'.", args.config)
 with open(args.config, encoding="utf8") as file:
 	config = yaml.load(file, Loader=yaml.SafeLoader)
 
-	bindings: Dict[str, str] = config.get("bindings")
-	if bindings is None:
-		raise ValueError("'bindings' was not found in config.")
+bindings: Dict[str, str] = config.get("bindings")
+if bindings is None:
+	raise ValueError("'bindings' was not found in config.")
 
-	PyLaut(bindings).start()
+PyLaut(bindings).start()
